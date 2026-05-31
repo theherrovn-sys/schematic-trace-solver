@@ -167,9 +167,9 @@ export class SchematicTracePipelineSolver extends BaseSolver {
           inputTraces: Object.values(
             this.traceOverlapShiftSolver?.correctedTraceMap ??
               Object.fromEntries(
-                this.longDistancePairSolver!
-                  .getOutput()
-                  .allTracesMerged.map((p) => [p.mspPairId, p]),
+                this.longDistancePairSolver!.getOutput().allTracesMerged.map(
+                  (p) => [p.mspPairId, p],
+                ),
               ),
           ),
         },

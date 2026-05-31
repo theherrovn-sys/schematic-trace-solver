@@ -55,7 +55,7 @@ function mergeSegments(segments: Segment[], isHorizontal: boolean): Segment[] {
   if (segments.length <= 1) return segments
 
   const sorted = [...segments].sort((a, b) => {
-    const coord = isHorizontal ? "x1" as const : "y1" as const
+    const coord = isHorizontal ? ("x1" as const) : ("y1" as const)
     const aMin = Math.min(a[coord], isHorizontal ? a.x2 : a.y2)
     const bMin = Math.min(b[coord], isHorizontal ? b.x2 : b.y2)
     return aMin - bMin
@@ -210,7 +210,10 @@ export class SameNetTraceCollapseSolver extends BaseSolver {
   outputTraces: SolvedTracePath[]
   inputProblem: InputProblem
 
-  constructor(params: { inputProblem: InputProblem; inputTraces: SolvedTracePath[] }) {
+  constructor(params: {
+    inputProblem: InputProblem
+    inputTraces: SolvedTracePath[]
+  }) {
     super()
     this.inputProblem = params.inputProblem
     this.inputTraces = params.inputTraces
@@ -281,7 +284,10 @@ export class SameNetTraceCollapseSolver extends BaseSolver {
         if (!graph.has(pk1)) graph.set(pk1, new Map())
         if (!graph.has(pk2)) graph.set(pk2, new Map())
 
-        const len = pointDist({ x: seg.x1, y: seg.y1 }, { x: seg.x2, y: seg.y2 })
+        const len = pointDist(
+          { x: seg.x1, y: seg.y1 },
+          { x: seg.x2, y: seg.y2 },
+        )
         graph.get(pk1)!.set(pk2, len)
         graph.get(pk2)!.set(pk1, len)
       }
@@ -335,8 +341,16 @@ export class SameNetTraceCollapseSolver extends BaseSolver {
     const netColors = new Map<string, string>()
     let colorIdx = 0
     const colors = [
-      "red", "blue", "green", "purple", "orange",
-      "teal", "magenta", "brown", "pink", "cyan",
+      "red",
+      "blue",
+      "green",
+      "purple",
+      "orange",
+      "teal",
+      "magenta",
+      "brown",
+      "pink",
+      "cyan",
     ]
 
     for (const trace of this.inputTraces) {
